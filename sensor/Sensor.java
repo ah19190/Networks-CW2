@@ -58,7 +58,7 @@ public class Sensor implements ISensor {
     @Override
     public void run (int N) throws InterruptedException {
         /* TODO: Send N measurements */
-
+        totMsg = N;
         /* Hint: You can pick ONE measurement by calling */
          float measurement = this.getMeasurement();
 
@@ -94,10 +94,12 @@ public class Sensor implements ISensor {
         int totMsg = Integer.parseInt(args[2]);
 
         /* TODO: Call constructor of sensor to build Sensor object*/
-        new Sensor(address, port, totMsg);
+        UDPSensor udpSensor = new Sensor(address, port, totMsg);
 
         /* TODO: Use Run to send the messages */
+        udpSensor.run(totMsg);
 
+        udpSensor.closeSocket(); 
     }
 
     @Override
@@ -140,5 +142,9 @@ public class Sensor implements ISensor {
         measurement = r.nextFloat() * (max_measure - min_measure) + min_measure;
 
         return measurement;
+    }
+
+    public void closeSocket() {
+        udpSocket.close();
     }
 }
