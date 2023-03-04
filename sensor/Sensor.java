@@ -97,7 +97,7 @@ public class Sensor implements ISensor {
         UDPSensor udpSensor = new Sensor(address, port, totMsg);
 
         /* TODO: Use Run to send the messages */
-        udpSensor.run(totMsg);
+        udpSensor.run(2000);
 
         udpSensor.closeSocket(); 
     }
